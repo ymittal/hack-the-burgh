@@ -29,6 +29,12 @@ class SkyScannerApiClient:
                 self._key
             )
 
+    def get_place_from_id(self, places, id):
+        for place in places:
+            if place['PlaceId'] == id:
+                return place
+        return {}
+
     def parse_quotes_data(self, data):
         min_price, min_quote = float('inf'), None
         for quote in data['Quotes']:
@@ -36,19 +42,22 @@ class SkyScannerApiClient:
                 min_price = quote['MinPrice']
                 min_quote = quote
 
-        # TODO: add carrier data
+        originPlace = self.get_place_from_id(data['Places'],
+                                             min_quote['OutboundLeg']['OriginId'])
+        destPlace = self.get_place_from_id(data['Places'],
+                                           min_quote['OutboundLeg']['DestinationId'])
         return {
             'price': min_quote['MinPrice'],
-            'originId': min_quote['OutboundLeg']['OriginId'],
-            'destId': min_quote['OutboundLeg']['DestinationId'],
+            'origin': originPlace,
+            'destination': destPlace,
             'datetime': min_quote['OutboundLeg']['DepartureDate']
         }
 
-    def launch_reqs(self, urls):
+    def launch_reqs(self, urls, locs_pairs):
         result = []
 
         rs = (gre.get(u) for u in urls)
-        for response in gre.map(rs):
+        for idx, response in enumerate(gre.map(rs)):
             if response.status_code != 200:
                 result.append(None)
             else:
