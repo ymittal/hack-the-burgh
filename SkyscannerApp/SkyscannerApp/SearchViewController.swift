@@ -76,13 +76,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     @IBAction func pressRound(_ sender: Any) {
         round.backgroundColor = UIColor.white
         one.backgroundColor = UIColor.clear
-        roundTrip = true 
+        roundTrip = true
+        dest.text = origin.text
     }
     
     @IBAction func pressOne(_ sender: Any) {
         round.backgroundColor = UIColor.clear
         one.backgroundColor = UIColor.white
         roundTrip = false
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -9,7 +9,6 @@ import UIKit
 
 class ResultsViewController: UIViewController {
     @IBOutlet weak var back: UIButton!
-    @IBOutlet weak var book: UIButton!
     
     var info : [String] = []
     
@@ -20,10 +19,7 @@ class ResultsViewController: UIViewController {
         back.layer.cornerRadius = back.frame.height / 2
         back.setTitleColor(UIColor.black, for: .normal)
         back.backgroundColor = UIColor.white
-        
-        book.layer.cornerRadius = back.frame.height / 2
-        book.setTitleColor(UIColor.black, for: .normal)
-        book.backgroundColor = UIColor.white
+
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         UIImage(named: "background")?.draw(in: self.view.bounds)

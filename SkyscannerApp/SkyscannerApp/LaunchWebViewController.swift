@@ -11,7 +11,10 @@ import WebKit
 
 
 class LaunchWebViewController : UIViewController, UIWebViewDelegate {
+    
 
+
+    
     @IBOutlet weak var webView: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +23,9 @@ class LaunchWebViewController : UIViewController, UIWebViewDelegate {
             let request = URLRequest(url: url)
             webView.loadRequest(request)
         }
+    }
+    
+    @IBAction func clickButton(_ sender: Any) {
     }
 }
 

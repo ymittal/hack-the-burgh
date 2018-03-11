@@ -12,7 +12,12 @@ import FirebaseDatabase
 
 class SocialViewController: UITableViewController {
     
+    var people : [String] = ["11-03-18: Spain (BCN) - 4", "11-03-18: Edinburgh (EDI) - 3", "11-03-18: London (STN) - 10"]
+    
     override func viewDidLoad() {
+        //for i in 0... 2 {
+            
+        //}
         super.viewDidLoad()
     }
     
