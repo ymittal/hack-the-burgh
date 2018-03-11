@@ -75,16 +75,18 @@ def generate_perms(origin,
 
 @app.route("/createItinerary", methods=['POST'])
 def pricesEndpoint():
-    country = request.form.get('country', 'UK')
-    currency = request.form.get('currency', 'GBP')
-    locale = request.form.get('locale', 'en-GB')
-    origin = request.form['origin']
-    destination = request.form.get('destination', 'anywhere')
-    num_stops = int(request.form.get('num_stops', 0))
+    data = eval(request.form.keys()[0])
+    country = data.get('country', 'UK')
+    currency = data.get('currency', 'GBP')
+    locale = data.get('locale', 'en-GB')
+    origin = data.get('origin')
+    destination = data.get('destination', 'anywhere')
+    num_stops = int(data.get('num_stops', 0))
+    print(num_stops, destination)
     wish_list = [e.strip() for e in
-                 str(request.form.get('wish_list', []))[1:-1].split(',')]
-    start_date = request.form['start_date']
-    end_date = request.form['end_date']
+                 str(data.get('wish_list', '')).split(',')]
+    start_date = data['start_date']
+    end_date = data['end_date']
 
     generate_perms(origin=origin,
                    destination=destination,
