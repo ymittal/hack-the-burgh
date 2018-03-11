@@ -63,6 +63,8 @@ def generate_perms(origin,
         pair_to_data_dict = dict(zip(list_pairs_per_depth,
                                      client.launch_reqs(urls_per_depth)))
 
+        print(pair_to_data_dict)
+
         for permIdx, perm in enumerate(perms):
             locations = (perm[idx], perm[idx + 1])
             flight_data_perms[permIdx].append({
@@ -73,16 +75,16 @@ def generate_perms(origin,
 
 @app.route("/createItinerary", methods=['POST'])
 def pricesEndpoint():
-    request.data = eval(request.data)
-    country = request.data.get('country', 'UK')
-    currency = request.data.get('currency', 'GBP')
-    locale = request.data.get('locale', 'en-GB')
-    origin = request.data['origin']
-    destination = request.data.get('destination', 'anywhere')
-    num_stops = request.data.get('num_stops', 0)
-    wish_list = request.data.get('wish_list', [])
-    start_date = request.data['start_date']
-    end_date = request.data['end_date']
+    request.form = eval(request.form)
+    country = request.form.get('country', 'UK')
+    currency = request.form.get('currency', 'GBP')
+    locale = request.form.get('locale', 'en-GB')
+    origin = request.form['origin']
+    destination = request.form.get('destination', 'anywhere')
+    num_stops = request.form.get('num_stops', 0)
+    wish_list = request.form.get('wish_list', [])
+    start_date = request.form['start_date']
+    end_date = request.form['end_date']
 
     generate_perms(origin=origin,
                    destination=destination,
