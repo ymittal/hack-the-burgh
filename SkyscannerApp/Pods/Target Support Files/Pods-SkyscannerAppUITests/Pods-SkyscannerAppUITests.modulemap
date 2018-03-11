@@ -1,0 +1,6 @@
+framework module Pods_SkyscannerAppUITests {
+  umbrella header "Pods-SkyscannerAppUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
