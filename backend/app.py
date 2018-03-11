@@ -96,8 +96,8 @@ def generate_perms(origin,
 
 @app.route("/createItinerary", methods=['POST'])
 def pricesEndpoint():
-    # data = eval(request.form.keys()[0])
-    data = request.form
+    data = eval(request.form.keys()[0])
+    # data = request.form
     country = data.get('country', 'UK')
     currency = data.get('currency', 'GBP')
     locale = data.get('locale', 'en-GB')
