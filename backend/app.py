@@ -32,7 +32,6 @@ def collect_data_by_leg(perms, depth, out_param):
                                                    destination=x[1],
                                                    outbound_dt=out_param),
                          locs_pairs_per_depth)
-
     return dict(zip(locs_pairs_per_depth,
                     client.launch_reqs(urls_per_depth, locs_pairs_per_depth)))
 
@@ -77,7 +76,6 @@ def generate_perms(origin,
                 .strftime(DT_FRMT)
 
         pair_to_data_dict = collect_data_by_leg(perms, idx, out_param)
-
         for permIdx, perm in enumerate(perms):
             locations = (perm[idx], perm[idx + 1])
             flight_data = pair_to_data_dict.get(locations)
@@ -104,8 +102,12 @@ def pricesEndpoint():
     origin = data.get('origin')
     destination = data.get('destination', 'anywhere')
     num_stops = int(data.get('num_stops', 0))
-    wish_list = [e.strip() for e in
-                 str(data.get('wish_list', '')).split(',')]
+    wish_list = data.get('wish_list', [])
+    if wish_list != '':
+	wish_list = [e.strip() for e in
+                 str(wish_list).split(',')]
+    else:
+        wish_list = []
     start_date = data['start_date']
     end_date = data['end_date']
 
